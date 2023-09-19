@@ -1,0 +1,62 @@
+﻿<Window x:Class="_17_VuDucHuy_SalesWPFApp.ProductManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_17_VuDucHuy_SalesWPFApp"
+        mc:Ignorable="d"
+        Title="ProductManagement" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+            <TextBlock Text="Product Management" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24"/>
+        </StackPanel>
+        <WrapPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Product ID" Margin="10"/>
+                <TextBox x:Name="txtProductID" Width="150" Height="30" Margin="10,0,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Product Name" Margin="10"/>
+                <TextBox x:Name="txtProductName" Width="150" Height="30" Margin="10,0,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Product Price" Margin="10"/>
+                <TextBox x:Name="txtUnitPrice" Width="150" Height="30" Margin="10,0,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="UnitInStock" Margin="10"/>
+                <TextBox x:Name="txtUnitInStock" Width="150" Height="30" Margin="10,0,10,0"/>
+            </StackPanel>
+            <DockPanel>
+                <!--btnSearch-->
+                <Button x:Name="btnSearch" Content="Search" VerticalAlignment="Bottom" Width="100" Height="30"   Click="btnSearch_Click"/>
+            </DockPanel>
+        </WrapPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
+            <!--Button controls(Load, Add, Edit, Delete) -->
+            <Button x:Name="btnLoad" Content="Load" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnLoad_Click"/>
+            <Button x:Name="btnAdd" Content="Add" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnAdd_Click"/>
+            <Button x:Name="btnEdit" Content="Edit" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnEdit_Click"/>
+            <Button x:Name="btnDelete" Content="Delete" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnDelete_Click"/>
+        </StackPanel>
+        <!--Listview-->
+        <ListView x:Name="lvProduct" Width="Auto" Height="Auto" Grid.Row="3" Margin="10" SelectionChanged="lvProduct_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Product ID" Width="100" DisplayMemberBinding="{Binding ProductID}"/>
+                    <GridViewColumn Header="Product Name" Width="150" DisplayMemberBinding="{Binding ProductName}"/>
+                    <GridViewColumn Header="CategoryID" Width="100"  DisplayMemberBinding="{Binding CategoryID}"/>
+                    <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding Weight}"/>
+                    <GridViewColumn Header="Unit Price" Width="100" DisplayMemberBinding="{Binding UnitPrice}"/>
+                    <GridViewColumn Header="Unit In Stock" Width="150" DisplayMemberBinding="{Binding UnitInStock}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
