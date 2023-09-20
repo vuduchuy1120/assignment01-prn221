@@ -50,7 +50,11 @@
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                     <TextBlock Text="Country: " FontSize="14" Width="150"/>
                     <TextBox  DataContext="{Binding ElementName=lvMember,Path=SelectedItem}"
-                        IsEnabled="False" x:Name="txtMemberCounty" Width="200" FontSize="14" FontWeight="Bold" Text="{Binding Country, Mode=OneWay}"/>
+                        IsEnabled="False" 
+                              x:Name="txtMemberCounty"
+                              Width="200" FontSize="14"
+                              FontWeight="Bold" 
+                              Text="{Binding Country, Mode=OneWay}"/>
                 </StackPanel>
                 <!--Password-->
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
@@ -110,7 +114,13 @@
                         <GridViewColumn Header="Company Name" Width="100" DisplayMemberBinding="{Binding CompanyName}"/>
                         <GridViewColumn Header="City" Width="100" DisplayMemberBinding="{Binding City}"/>
                         <GridViewColumn Header="Country" Width="100" DisplayMemberBinding="{Binding Country}"/>
-                        <GridViewColumn Header="Password" Width="100" DisplayMemberBinding="{Binding Password}"/>
+                        <GridViewColumn Header="Password" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="***" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

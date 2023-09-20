@@ -24,6 +24,7 @@ namespace _17_VuDucHuy_SalesWPFApp
         public static bool isAddMember = false;
         public static Member member = null;
         IMemberRepository _memberRepository;
+
         public MemberManagement(IMemberRepository memberRepository)
         {
             InitializeComponent();

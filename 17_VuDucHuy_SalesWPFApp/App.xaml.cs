@@ -35,11 +35,13 @@ namespace _17_VuDucHuy_SalesWPFApp
             services.AddSingleton<ProductManagement>();
             services.AddSingleton<Login>();
             services.AddSingleton<NavigationControl>();
+            services.AddSingleton<UserControl>();
+
         }
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            var mainWindow = _serviceProvider.GetService<NavigationControl>();
+            var mainWindow = _serviceProvider.GetService<Login>();
             mainWindow.Show();
         }
         

@@ -18,10 +18,15 @@ namespace DataAccess.Repository
 
         public IEnumerable<Order> GetOrders() => OrderDAO.Instance.GetAllOrders();
 
+        public IEnumerable<Order> GetOrdersByMemberID(int memberID) => OrderDAO.Instance.GetOrdersByMemberID(memberID);
+
 
         public void InsertOrder(Order order) => OrderDAO.Instance.AddOrder(order);
 
         public IEnumerable SearchOrder(DateTime startDate, DateTime endDate)=> OrderDAO.Instance.SearchOrder(startDate, endDate);
+
+        public IEnumerable SearchOrderByMemberID(DateTime startDate, DateTime endDate, int memberID)=> OrderDAO.Instance.SearchOrderByMemberID(startDate, endDate,memberID);
+
 
         public void UpdateOrder(Order order) => OrderDAO.Instance.UpdateOrder(order);
 

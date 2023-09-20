@@ -16,5 +16,7 @@ namespace DataAccess.Repository
         void DeleteOrder(Order order);
         void UpdateOrder(Order order);
         IEnumerable SearchOrder(DateTime startDate, DateTime endDate);
+        IEnumerable<Order> GetOrdersByMemberID(int memberID);
+        IEnumerable SearchOrderByMemberID(DateTime startDate, DateTime endDate,int memberID);
     }
 }

@@ -17,7 +17,11 @@
                 <TextBlock Text="Password" Width="100" VerticalAlignment="Center"/>
                 <PasswordBox x:Name="txtPassword" Width="200" VerticalAlignment="Center"/>
             </StackPanel>
-            <Button x:Name="btnLogin" Content="Login" Width="100" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                <Button IsDefault="True" x:Name="btnLogin" Content="Login" Width="80" HorizontalAlignment="Center" Margin="100,0,0,20" Click="btnLogin_Click"/>
+                <Button Content="Register" Name="btnRegister" Width="80" HorizontalAlignment="Center" Margin="20,0,0,20" Click="btnRegister_Click"/>
+            </StackPanel>
+            
             <TextBlock x:Name="txtError" Text="Error" Foreground="Red" HorizontalAlignment="Center" Visibility="Collapsed"/>
         </StackPanel>
     </Grid>

@@ -28,23 +28,21 @@ namespace _17_VuDucHuy_SalesWPFApp
 
         private void BtnOrder_Click(object sender, RoutedEventArgs e)
         {
-            OrderManagement orderManagement = OrderManagement.GetInstance(new OrderRepository()); // Thay OrderRepository() bằng đối tượng Repository của bạn.
+            OrderManagement orderManagement = new  OrderManagement(new OrderRepository()); // Thay OrderRepository() bằng đối tượng Repository của bạn.
             orderManagement.Show();
-        }
-
-        private void BtnMember_Click_2(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void BtnProduct_Click(object sender, RoutedEventArgs e)
         {
-
+            ProductManagement productManagement = new ProductManagement(new ProductRepository()); // Thay OrderRepository() bằng đối tượng Repository của bạn.
+            productManagement.Show();
         }
 
         private void BtnMember_Click(object sender, RoutedEventArgs e)
         {
+            MemberManagement memberManagement = new MemberManagement(new MemberRepository()); // Thay MemberRepository() bằng đối tượng Repository của bạn.
 
+            memberManagement.Show();
         }
     }
 }

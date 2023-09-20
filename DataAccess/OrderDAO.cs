@@ -119,7 +119,7 @@ namespace DataAccess
             }
         }
 
-        internal IEnumerable SearchOrder(DateTime startDate, DateTime endDate)
+        public IEnumerable SearchOrder(DateTime startDate, DateTime endDate)
         {
             try
             {
@@ -128,6 +128,34 @@ namespace DataAccess
                 return orders;
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IEnumerable<Order> GetOrdersByMemberID(int memberID)
+        {
+            try
+            {
+                var myContext = new ShoppingContext();
+                var orders = myContext.Orders.Where(o => o.MemberId == memberID).OrderByDescending<Order, DateTime>(order => order.OrderDate).ToList();
+                  return orders;
+
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        internal IEnumerable SearchOrderByMemberID(DateTime startDate, DateTime endDate, int memberID)
+        {
+            try
+            {
+                var myContext = new ShoppingContext();
+                var orders = myContext.Orders.Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate && o.MemberId == memberID).ToList();
+                return orders;
+
+            }catch(Exception ex)
             {
                 throw ex;
             }

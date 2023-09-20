@@ -24,6 +24,7 @@ namespace _17_VuDucHuy_SalesWPFApp
         public static bool isAddProduct = false;
         public static Product product = null;
         IProductRepository _ProductRepository;
+
         public ProductManagement(IProductRepository productRepository)
         {
             InitializeComponent();

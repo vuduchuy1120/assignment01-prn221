@@ -29,23 +29,45 @@ namespace _17_VuDucHuy_SalesWPFApp
             try
             {
                 InitializeComponent();
-                if (MemberManagement.isAddMember == true)
+                if (Login.isRegister == true)
                 {
-                    this.Title = "Add Member";
+                    clear();
+
                 }
                 else
                 {
-                    this.Title = "Edit Member";
-                    Member mb = MemberManagement.member;
-                    clear();
-                    txtAddOrEditMemberID.Text = mb.MemberId.ToString();
-                    txtAddOrEditEmail.Text = mb.Email;
-                    txtAddOrEditCompanyName.Text = mb.CompanyName;
-                    txtAddOrEditMemberCity.Text = mb.City;
-                    txtAddOrEditMemberCountry.Text = mb.Country;
-                    txtAddOrEditMemberPassword.Text = mb.Password;
+                    if (MemberManagement.isAddMember == true)
+                    {
+                        this.Title = "Add Member";
+                    }
+                    else if (MemberManagement.isAddMember == false && Login.isAdmin == true)
+                    {
+                        this.Title = "Edit Member";
+                        Member mb = MemberManagement.member;
+                        clear();
+                        txtAddOrEditMemberID.Text = mb.MemberId.ToString();
+                        txtAddOrEditEmail.Text = mb.Email;
+                        txtAddOrEditCompanyName.Text = mb.CompanyName;
+                        txtAddOrEditMemberCity.Text = mb.City;
+                        txtAddOrEditMemberCountry.Text = mb.Country;
+                        txtAddOrEditMemberPassword.Password = mb.Password;
+                    }
+                    else if (MemberManagement.isAddMember == false && Login.isAdmin == false)
+                    {
+                        this.Title = "Edit Profile";
+                        Member member = MemberDAO.Instance.GetMemberByID(Login.memberID);
+                        clear();
+                        txtAddOrEditMemberID.Text = member.MemberId.ToString();
+                        txtAddOrEditEmail.Text = member.Email;
+                        txtAddOrEditEmail.IsEnabled = false;
+                        txtAddOrEditCompanyName.Text = member.CompanyName;
+                        txtAddOrEditMemberCity.Text = member.City;
+                        txtAddOrEditMemberCountry.Text = member.Country;
+                        txtAddOrEditMemberPassword.Password = member.Password;
+                    }
+
                 }
-                
+
                 memberRepository = repository;
             }
             catch (Exception ex)
@@ -60,36 +82,57 @@ namespace _17_VuDucHuy_SalesWPFApp
             txtAddOrEditCompanyName.Text = "";
             txtAddOrEditMemberCity.Text = "";
             txtAddOrEditMemberCountry.Text = "";
-            txtAddOrEditMemberPassword.Text = "";
+            txtAddOrEditMemberPassword.Password = "";
 
         }
         private Member GetMemberObject()
         {
-            return new Member(txtAddOrEditEmail.Text, txtAddOrEditCompanyName.Text, txtAddOrEditMemberCity.Text, txtAddOrEditMemberCountry.Text, txtAddOrEditMemberPassword.Text);
+            return new Member(txtAddOrEditEmail.Text, txtAddOrEditCompanyName.Text, txtAddOrEditMemberCity.Text, txtAddOrEditMemberCountry.Text, txtAddOrEditMemberPassword.Password);
         }
 
         private void btnAddOrEditSave_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (MemberManagement.isAddMember)
+                if (Login.isRegister)
                 {
                     Member mb = GetMemberObject();
                     memberRepository.InsertMember(mb);
+                    Login.isRegister = false;
                     this.Close();
                 }
                 else
                 {
-                    Member mb = MemberManagement.member;
-                    mb.Email = txtAddOrEditEmail.Text;
-                    mb.CompanyName = txtAddOrEditCompanyName.Text;
-                    mb.City = txtAddOrEditMemberCity.Text;
-                    mb.Country = txtAddOrEditMemberCountry.Text;
-                    mb.Password = txtAddOrEditMemberPassword.Text;
-                    memberRepository.UpdateMember(mb);                  
-                    this.Close();                 
-                }
+                    if (MemberManagement.isAddMember)
+                    {
+                        Member mb = GetMemberObject();
+                        memberRepository.InsertMember(mb);
+                        this.Close();
+                    }
+                    else if (Login.isAdmin == true)
+                    {
+                        Member mb = MemberManagement.member;
+                        mb.Email = txtAddOrEditEmail.Text;
+                        mb.CompanyName = txtAddOrEditCompanyName.Text;
+                        mb.City = txtAddOrEditMemberCity.Text;
+                        mb.Country = txtAddOrEditMemberCountry.Text;
+                        mb.Password = txtAddOrEditMemberPassword.Password;
+                        memberRepository.UpdateMember(mb);
+                        this.Close();
+                    }
+                    else if (Login.isAdmin == false)
+                    {
+                        Member mb = MemberDAO.Instance.GetMemberByID(Login.memberID);
+                        mb.CompanyName = txtAddOrEditCompanyName.Text;
+                        mb.City = txtAddOrEditMemberCity.Text;
+                        mb.Country = txtAddOrEditMemberCountry.Text;
+                        mb.Password = txtAddOrEditMemberPassword.Password;
+                        memberRepository.UpdateMember(mb);
+                        this.Close();
+                    }
 
+                }
+                
 
             }
             catch (Exception ex)
