@@ -27,13 +27,17 @@ namespace _17_VuDucHuy_SalesWPFApp
         private void ConfigureServices(ServiceCollection services)
         {
             services.AddSingleton(typeof(IMemberRepository), typeof(MemberRepository));
+            services.AddSingleton(typeof(IOrderRepository), typeof(OrderRepository));
+            //product
+            services.AddSingleton(typeof(IProductRepository), typeof(ProductRepository));
             services.AddSingleton<MemberManagement>();
-            services.AddSingleton<AddOrEditMember>();
+            services.AddSingleton<OrderManagement>();
+            services.AddSingleton<ProductManagement>();
         }
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            var mainWindow = _serviceProvider.GetService<MemberManagement>();
+            var mainWindow = _serviceProvider.GetService<OrderManagement>();
             mainWindow.Show();
         }
         

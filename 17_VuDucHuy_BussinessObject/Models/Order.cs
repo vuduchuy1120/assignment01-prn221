@@ -19,5 +19,14 @@ namespace _17_VuDucHuy_BussinessObject.Models
 
         public virtual Member Member { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+
+        public Order(int memberId, DateTime orderDate, DateTime requiredDate, DateTime shippedDate, decimal freight, Member member)
+        {
+            MemberId = memberId;
+            OrderDate = orderDate;
+            RequiredDate = requiredDate;
+            ShippedDate = shippedDate;
+            Freight = freight;
+        }
     }
 }

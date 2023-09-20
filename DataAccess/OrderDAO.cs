@@ -1,5 +1,4 @@
 ﻿using _17_VuDucHuy_BussinessObject.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class ProductDAO
+    public class OrderDAO
     {
         // using singleton pattern
-        private static ProductDAO instance = null;
+        private static OrderDAO instance;
         private static readonly object instanceLock = new object();
-        private ProductDAO() { }
-        public static ProductDAO Instance
+        private OrderDAO() { }
+        public static OrderDAO Instance
         {
             get
             {
@@ -22,105 +21,100 @@ namespace DataAccess
                 {
                     if (instance == null)
                     {
-                        instance = new ProductDAO();
+                        instance = new OrderDAO();
                     }
                     return instance;
                 }
             }
         }
 
-        public IEnumerable<Product> GetProducts()
+        //getOrder by ID
+        public Order GetOrderByID(int orderID)
         {
-            List<Product> products;
+            Order order = null;
             try
             {
                 var myContext = new ShoppingContext();
-                products = myContext.Products.ToList();
+                order = myContext.Orders.SingleOrDefault(o => o.OrderId == orderID);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return products;
+            return order;
         }
-
-        public void AddProduct(Product product)
+        public IEnumerable<Order> GetAllOrders()
         {
-              try
+              List<Order> orders;
+            try
             {
                 var myContext = new ShoppingContext();
-                myContext.Products.Add(product);
+                orders = myContext.Orders.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return orders;
+        }
+
+        public void AddOrder(Order order)
+        {
+            try
+            {
+                var myContext = new ShoppingContext();
+                myContext.Orders.Add(order);
                 myContext.SaveChanges();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
         }
-
-        // getProductByID
-        public Product GetProductByID(int productID)
-        {
-            Product product = null;
+        public void DeleteOrder(Order order) {
             try
             {
-                var myContext = new ShoppingContext();
-                product = myContext.Products.SingleOrDefault(p => p.ProductId == productID);
+                Order _order = GetOrderByID(order.OrderId);
+                if(_order != null)
+                {
+                    var myContext = new ShoppingContext();
+                    myContext.Orders.Remove(_order);
+                    myContext.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Order not found");
+                }
 
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return product;
         }
-        public void RemoveProduct(Product product)
-        {
 
+        public void UpdateOrder(Order order)
+        {
             try
             {
-                Product _product = GetProductByID(product.ProductId);
-                if(_product != null)
+                Order _order = GetOrderByID(order.OrderId);
+                if (_order != null)
                 {
                     var myContext = new ShoppingContext();
-                    myContext.Products.Remove(_product);
+                    myContext.Entry(_order).CurrentValues.SetValues(order);
                     myContext.SaveChanges();
                 }
                 else
                 {
-                    throw new Exception("Product not exists!");
+                    throw new Exception("Order not found");
                 }
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
-
-        public void UpdateProduct(Product product)
-        {
-            try
-            {
-                Product _product = GetProductByID(product.ProductId);
-                if(_product != null)
-                {
-                    var myContext = new ShoppingContext();
-                    myContext.Entry(_product).State = EntityState.Detached;
-                    myContext.Entry(product).State = EntityState.Modified;
-                    myContext.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("Product not exists!");
-                }
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-        }
-     
-
+        
     }
 }

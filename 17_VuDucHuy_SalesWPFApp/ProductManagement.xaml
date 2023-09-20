@@ -35,15 +35,15 @@
             </StackPanel>
             <DockPanel>
                 <!--btnSearch-->
-                <Button x:Name="btnSearch" Content="Search" VerticalAlignment="Bottom" Width="100" Height="30"   Click="btnSearch_Click"/>
+                <Button x:Name="btnProductSearch" Content="Search" VerticalAlignment="Bottom" Width="100" Height="30"   Click="btnSearch_Click"/>
             </DockPanel>
         </WrapPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
             <!--Button controls(Load, Add, Edit, Delete) -->
-            <Button x:Name="btnLoad" Content="Load" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnLoad_Click"/>
-            <Button x:Name="btnAdd" Content="Add" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnAdd_Click"/>
-            <Button x:Name="btnEdit" Content="Edit" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnEdit_Click"/>
-            <Button x:Name="btnDelete" Content="Delete" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnDelete_Click"/>
+            <Button x:Name="btnProductLoad" Content="Load" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnLoad_Click"/>
+            <Button x:Name="btnProductAdd" Content="Add" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnAdd_Click"/>
+            <Button x:Name="btnProductEdit" Content="Edit" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnEdit_Click"/>
+            <Button x:Name="btnProductDelete" Content="Delete" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnDelete_Click"/>
         </StackPanel>
         <!--Listview-->
         <ListView x:Name="lvProduct" Width="Auto" Height="Auto" Grid.Row="3" Margin="10" SelectionChanged="lvProduct_SelectionChanged">
