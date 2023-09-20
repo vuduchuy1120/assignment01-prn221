@@ -1,6 +1,9 @@
 ﻿using _17_VuDucHuy_BussinessObject.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,7 +104,7 @@ namespace DataAccess
                 if (_order != null)
                 {
                     var myContext = new ShoppingContext();
-                    myContext.Entry(_order).CurrentValues.SetValues(order);
+                    myContext.Entry<Order>(order).State = EntityState.Modified;
                     myContext.SaveChanges();
                 }
                 else
@@ -115,6 +118,19 @@ namespace DataAccess
                 throw ex;
             }
         }
-        
+
+        internal IEnumerable SearchOrder(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var myContext = new ShoppingContext();
+                var orders = myContext.Orders.Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate).ToList();
+                return orders;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

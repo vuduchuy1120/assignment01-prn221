@@ -103,5 +103,10 @@ namespace _17_VuDucHuy_SalesWPFApp
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnAddOrEditCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

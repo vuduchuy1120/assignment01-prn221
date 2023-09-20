@@ -98,5 +98,9 @@ namespace _17_VuDucHuy_SalesWPFApp
             }
         }
 
+        private void btnAddOrEditCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -44,7 +44,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1"  HorizontalAlignment="Center">
             <Button x:Name="btnAddOrEditSave" Content="Save" Width="100" Margin="10,20,0,0" Click="btnAddOrEditSave_Click"/>
-            <Button x:Name="btnAddOrEditCancel" Content="Cancel" Width="100" Margin="10,20,0,0"/>
+            <Button x:Name="btnAddOrEditCancel" Content="Cancel" Width="100" Margin="10,20,0,0" Click="btnAddOrEditCancel_Click"/>
         </StackPanel>
     </Grid>
 </Window>

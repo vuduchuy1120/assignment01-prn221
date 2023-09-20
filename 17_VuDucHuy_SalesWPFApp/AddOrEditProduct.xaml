@@ -16,7 +16,9 @@
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Margin="0,40,0,0">
                 <Label Content="ProductID" Width="100" Margin="30,20,0,0"/>
-                <TextBox x:Name="txtAddOrEditProductID" Width="200" Margin="10,20,0,0"/>
+                <TextBox 
+                    IsEnabled="False"
+                    x:Name="txtAddOrEditProductID" Width="200" Margin="10,20,0,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="ProductName" Width="100" Margin="30,20,0,0"/>
@@ -43,8 +45,8 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20" HorizontalAlignment="Center">
-            <Button x:Name="btnAddOrEditProductSave" Content="Save" Width="100" Margin="10,20,0,0"/>
-            <Button x:Name="btnAddOrEditProductCancel" Content="Cancel" Width="100" Margin="10,20,0,0"/>
+            <Button x:Name="btnAddOrEditProductSave" Content="Save" Width="100" Margin="10,20,0,0" Click="btnAddOrEditProductSave_Click"/>
+            <Button x:Name="btnAddOrEditProductCancel" Content="Cancel" Width="100" Margin="10,20,0,0" Click="btnAddOrEditProductCancel_Click"/>
         </StackPanel>
     </Grid>
 </Window>

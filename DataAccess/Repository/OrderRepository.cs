@@ -1,5 +1,6 @@
 ﻿using _17_VuDucHuy_BussinessObject.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,8 @@ namespace DataAccess.Repository
 
 
         public void InsertOrder(Order order) => OrderDAO.Instance.AddOrder(order);
- 
+
+        public IEnumerable SearchOrder(DateTime startDate, DateTime endDate)=> OrderDAO.Instance.SearchOrder(startDate, endDate);
 
         public void UpdateOrder(Order order) => OrderDAO.Instance.UpdateOrder(order);
 

@@ -24,11 +24,26 @@ namespace _17_VuDucHuy_SalesWPFApp
         public static bool isAddOrder = false;
         public static Order order = null;
         private IOrderRepository _OrderRepository;
+
+
+        private static OrderManagement instance;
+
+        public static OrderManagement GetInstance(IOrderRepository orderRepository)
+        {
+            if (instance == null)
+            {
+                instance = new OrderManagement(orderRepository);
+            }
+            return instance;
+        }
+
+
         public OrderManagement(IOrderRepository OrderRepository)
         {
             InitializeComponent();
             _OrderRepository = OrderRepository;
         }
+
 
         private void btnOrderRemove_Click(object sender, RoutedEventArgs e)
         {
@@ -71,8 +86,27 @@ namespace _17_VuDucHuy_SalesWPFApp
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
+            // Kiểm tra xem ngày bắt đầu và ngày kết thúc đã được chọn
+            if (!dpStartDate.SelectedDate.HasValue || !dpEndDate.SelectedDate.HasValue)
+            {
+                MessageBox.Show("Please choose start date and end date");
+                return;
+            }
 
+            DateTime startDate = dpStartDate.SelectedDate.Value;
+            DateTime endDate = dpEndDate.SelectedDate.Value;
+
+            // Kiểm tra ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc
+            if (startDate > endDate)
+            {
+                MessageBox.Show("Start date must be smaller than or equal to end date");
+                return;
+            }
+
+            // Tiến hành tìm kiếm và cập nhật danh sách
+            lvOrder.ItemsSource = _OrderRepository.SearchOrder(startDate, endDate);
         }
+
 
         private void lvOrder_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

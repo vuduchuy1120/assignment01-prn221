@@ -1,5 +1,6 @@
 ﻿using _17_VuDucHuy_BussinessObject.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,6 @@ namespace DataAccess.Repository
         void UpdateProduct(Product product);
         void DeleteProduct(Product product);
         Product GetProductByID(int productID);
-
-
+        IEnumerable SearchProduct(string id, string name, string productPrice, string unitsInStock);
     }
 }

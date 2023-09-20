@@ -1,6 +1,7 @@
 ﻿using _17_VuDucHuy_BussinessObject.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -106,7 +107,6 @@ namespace DataAccess
                 if(_product != null)
                 {
                     var myContext = new ShoppingContext();
-                    myContext.Entry(_product).State = EntityState.Detached;
                     myContext.Entry(product).State = EntityState.Modified;
                     myContext.SaveChanges();
                 }
@@ -120,7 +120,22 @@ namespace DataAccess
                 throw ex;
             }
         }
-     
+
+        // SearchProduct(string id, string name, string productPrice, string unitsInStock)
+        public IEnumerable SearchProduct(string id, string name, string productPrice, string unitsInStock)
+        {
+            List<Product> products = null;
+            try
+            {
+                var myContext = new ShoppingContext();
+                products = myContext.Products.Where(p => p.ProductId.ToString().Contains(id) && p.ProductName.Contains(name) && p.UnitPrice.ToString().Contains(productPrice) && p.UnitsInStock.ToString().Contains(unitsInStock)).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return products;
+        }
 
     }
 }

@@ -36,8 +36,12 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
             <Button x:Name="btnOrderLoad" Content="Load" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnLoadOrder_Click"/>
             <Button x:Name="btnOrderAdd" Content="Add" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnAddOrder_Click"/>
-            <Button x:Name="btnOrderEdit" Content="Edit" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnEditOrder_Click"/>
-            <Button x:Name="btnOrderDelete" Content="Delete" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnOrderRemove_Click"/>
+            <Button x:Name="btnOrderEdit" 
+                    IsEnabled="False"
+                    Content="Edit" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnEditOrder_Click"/>
+            <Button x:Name="btnOrderDelete"
+                    IsEnabled="False"
+                    Content="Delete" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnOrderRemove_Click"/>
         </StackPanel>
         <!--Listview-->
         <ListView x:Name="lvOrder" Width="Auto" Height="Auto" Grid.Row="3" Margin="10" SelectionChanged="lvOrder_SelectionChanged">

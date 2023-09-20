@@ -42,19 +42,23 @@
             <!--Button controls(Load, Add, Edit, Delete) -->
             <Button x:Name="btnProductLoad" Content="Load" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnLoad_Click"/>
             <Button x:Name="btnProductAdd" Content="Add" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnAdd_Click"/>
-            <Button x:Name="btnProductEdit" Content="Edit" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnEdit_Click"/>
-            <Button x:Name="btnProductDelete" Content="Delete" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnDelete_Click"/>
+            <Button 
+                IsEnabled="False"
+                x:Name="btnProductEdit" Content="Edit" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnEdit_Click"/>
+            <Button 
+                IsEnabled="False"
+                x:Name="btnProductDelete" Content="Delete" VerticalAlignment="Bottom" Width="100" Height="30" Margin="10" Click="btnDelete_Click"/>
         </StackPanel>
         <!--Listview-->
         <ListView x:Name="lvProduct" Width="Auto" Height="Auto" Grid.Row="3" Margin="10" SelectionChanged="lvProduct_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Product ID" Width="100" DisplayMemberBinding="{Binding ProductID}"/>
+                    <GridViewColumn Header="Product ID" Width="100" DisplayMemberBinding="{Binding ProductId}"/>
                     <GridViewColumn Header="Product Name" Width="150" DisplayMemberBinding="{Binding ProductName}"/>
-                    <GridViewColumn Header="CategoryID" Width="100"  DisplayMemberBinding="{Binding CategoryID}"/>
+                    <GridViewColumn Header="CategoryID" Width="100"  DisplayMemberBinding="{Binding CategoryId}"/>
                     <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding Weight}"/>
                     <GridViewColumn Header="Unit Price" Width="100" DisplayMemberBinding="{Binding UnitPrice}"/>
-                    <GridViewColumn Header="Unit In Stock" Width="150" DisplayMemberBinding="{Binding UnitInStock}"/>
+                    <GridViewColumn Header="Unit In Stock" Width="150" DisplayMemberBinding="{Binding UnitsInStock}"/>
                 </GridView>
             </ListView.View>
         </ListView>
