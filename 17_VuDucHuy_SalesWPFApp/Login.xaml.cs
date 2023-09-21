@@ -87,6 +87,9 @@ namespace _17_VuDucHuy_SalesWPFApp
             {
                 txtUsername.Clear();
                 txtPassword.Clear();
+                isAdmin = false;
+                isRegister = false;
+                memberID = -1;
                 Show();
             };
         }
@@ -100,6 +103,9 @@ namespace _17_VuDucHuy_SalesWPFApp
             {
                 txtUsername.Clear();
                 txtPassword.Clear();
+                isAdmin = false;
+                isRegister = false;
+                memberID = -1;
                 Show();
             };
         }
@@ -109,6 +115,12 @@ namespace _17_VuDucHuy_SalesWPFApp
             isRegister = true;
             AddOrEditMember addOrEditMember = new AddOrEditMember(new MemberRepository());
             addOrEditMember.ShowDialog();
+            addOrEditMember.Closed += (s, args) =>
+            {
+                isAdmin = false;
+                isRegister = false;
+                memberID = -1;
+            };
         }
     }
 

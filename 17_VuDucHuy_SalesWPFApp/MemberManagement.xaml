@@ -56,11 +56,17 @@
                               FontWeight="Bold" 
                               Text="{Binding Country, Mode=OneWay}"/>
                 </StackPanel>
-                <!--Password-->
+                <!--Password Xin a zai day. -->
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                     <TextBlock Text="Password: " FontSize="14" Width="150"/>
-                    <TextBox  DataContext="{Binding ElementName=lvMember,Path=SelectedItem}"
-                        IsEnabled="False" x:Name="txtMemberPassword" Width="200" FontSize="14" FontWeight="Bold" Text="{Binding Password, Mode=OneWay}"/>
+                    <PasswordBox
+                        DataContext="{Binding ElementName=lvMember,Path=SelectedItem}"
+                        IsEnabled="False" 
+                        x:Name="txtMemberPassword"
+                        Width="200" FontSize="14" 
+                        FontWeight="Bold" 
+                        TabIndex="1"
+                        PasswordChar ="*"/>
                 </StackPanel>
                 <!--Button Load, Add, Edit, Remove-->
                 <StackPanel Orientation="Horizontal" 
@@ -114,7 +120,7 @@
                         <GridViewColumn Header="Company Name" Width="100" DisplayMemberBinding="{Binding CompanyName}"/>
                         <GridViewColumn Header="City" Width="100" DisplayMemberBinding="{Binding City}"/>
                         <GridViewColumn Header="Country" Width="100" DisplayMemberBinding="{Binding Country}"/>
-                        <GridViewColumn Header="Password" Width="100">
+                        <GridViewColumn Header="Password" Width="100" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="***" />

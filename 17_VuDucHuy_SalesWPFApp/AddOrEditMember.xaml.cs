@@ -32,7 +32,6 @@ namespace _17_VuDucHuy_SalesWPFApp
                 if (Login.isRegister == true)
                 {
                     clear();
-
                 }
                 else
                 {
@@ -107,6 +106,7 @@ namespace _17_VuDucHuy_SalesWPFApp
                     {
                         Member mb = GetMemberObject();
                         memberRepository.InsertMember(mb);
+                        MemberManagement.isAddMember = false;
                         this.Close();
                     }
                     else if (Login.isAdmin == true)
@@ -132,7 +132,6 @@ namespace _17_VuDucHuy_SalesWPFApp
                     }
 
                 }
-                
 
             }
             catch (Exception ex)
