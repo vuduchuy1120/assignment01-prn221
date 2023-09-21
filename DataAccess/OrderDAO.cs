@@ -48,7 +48,7 @@ namespace DataAccess
         }
         public IEnumerable<Order> GetAllOrders()
         {
-              List<Order> orders;
+            List<Order> orders;
             try
             {
                 var myContext = new ShoppingContext();
@@ -74,11 +74,12 @@ namespace DataAccess
                 throw ex;
             }
         }
-        public void DeleteOrder(Order order) {
+        public void DeleteOrder(Order order)
+        {
             try
             {
                 Order _order = GetOrderByID(order.OrderId);
-                if(_order != null)
+                if (_order != null)
                 {
                     var myContext = new ShoppingContext();
                     myContext.Orders.Remove(_order);
@@ -139,9 +140,10 @@ namespace DataAccess
             {
                 var myContext = new ShoppingContext();
                 var orders = myContext.Orders.Where(o => o.MemberId == memberID).OrderByDescending<Order, DateTime>(order => order.OrderDate).ToList();
-                  return orders;
+                return orders;
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -155,7 +157,8 @@ namespace DataAccess
                 var orders = myContext.Orders.Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate && o.MemberId == memberID).ToList();
                 return orders;
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

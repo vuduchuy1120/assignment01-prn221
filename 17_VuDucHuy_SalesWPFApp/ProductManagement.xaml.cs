@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -46,10 +47,45 @@ namespace _17_VuDucHuy_SalesWPFApp
             name = txtProductName.Text;
             productPrice = txtUnitPrice.Text;
             UnitsInStock = txtUnitInStock.Text;
-            lvProduct.ItemsSource = _ProductRepository.SearchProduct(id, name, productPrice, UnitsInStock);
+            try
+            {
+                if (!ValidateInput())
+                {
+                    return;
+                }
+                lvProduct.ItemsSource = _ProductRepository.SearchProduct(id, name, productPrice, UnitsInStock);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
 
         }
-
+        private bool ValidateInput()
+        {
+            string msg="";
+            if(txtProductID.Text!="" && Regex.IsMatch(txtProductID.Text,IConstant.REGEX_NUMBER)==false)
+            {
+                msg += "Product ID must be number\n";
+            }
+            if(txtUnitPrice.Text!="" && Regex.IsMatch(txtUnitPrice.Text,IConstant.REGEX_DECIMAL)==false)
+            {
+                msg += "Unit Price must be number\n";
+            }
+            if(txtUnitInStock.Text!="" && Regex.IsMatch(txtUnitInStock.Text,IConstant.REGEX_NUMBER)==false)
+            {
+                msg += "Unit In Stock must be number\n";
+            }
+            if(msg!="")
+            {
+                MessageBox.Show(msg);
+                return false;
+            }else
+            {
+                return true;
+            }
+        }
         private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
             LoadProductList();

@@ -1,4 +1,5 @@
 ﻿using _17_VuDucHuy_BussinessObject.Models;
+using DataAccess;
 using DataAccess.Repository;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,11 @@ namespace _17_VuDucHuy_SalesWPFApp
             try
             {
                 Member member = (Member)lvMember.SelectedItem;
+                var orders = OrderDAO.Instance.GetOrdersByMemberID(member.MemberId);
+                foreach (var order in orders)
+                {
+                    OrderDAO.Instance.DeleteOrder(order);
+                }
                 _memberRepository.DeleteMember(member);
                 LoadMemberList();
             }

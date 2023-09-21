@@ -90,20 +90,44 @@ namespace _17_VuDucHuy_SalesWPFApp
             {
                 if (ProductManagement.isAddProduct)
                 {
-                    Product mb = GetProductObject();
-                    productRepository.AddProduct(mb);
-                    this.Close();
+                    try
+                    {
+                        if(!ValidateInput())
+                        {
+                            return;
+                        }
+                        Product mb = GetProductObject();
+                        productRepository.AddProduct(mb);
+                        this.Close();
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    
                 }
                 else
                 {
+
                     Product mb = ProductManagement.product;
                     mb.CategoryId = int.Parse(txtAddOrEditCategoryID.Text);
                     mb.ProductName = txtAddOrEditProductName.Text;
                     mb.Weight = txtAddOrEditProductWeight.Text;
                     mb.UnitPrice = decimal.Parse(txtAddOrEditProductUnitPrice.Text);
                     mb.UnitsInStock = int.Parse(txtAddOrEditProductUnitsInStock.Text);
-                    productRepository.UpdateProduct(mb);
-                    this.Close();
+                    try
+                    {
+                        if(!ValidateInput())
+                        {
+                            return;
+                        }
+                        productRepository.UpdateProduct(mb);
+                        this.Close();
+                    }catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    
                 }
 
 
@@ -112,6 +136,38 @@ namespace _17_VuDucHuy_SalesWPFApp
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private bool ValidateInput()
+        {
+            string msg = "";
+            if (string.IsNullOrEmpty(txtAddOrEditCategoryID.Text) || !System.Text.RegularExpressions.Regex.IsMatch(txtAddOrEditCategoryID.Text, IConstant.REGEX_NUMBER))
+            {
+                msg += "Category ID is invalid\n";
+            }
+            if (string.IsNullOrEmpty(txtAddOrEditProductName.Text))
+            {
+                msg += "Product name is invalid\n";
+            }
+            if (string.IsNullOrEmpty(txtAddOrEditProductWeight.Text))
+            {
+                msg += "Product weight is invalid\n";
+            }
+            if (string.IsNullOrEmpty(txtAddOrEditProductUnitPrice.Text) || !System.Text.RegularExpressions.Regex.IsMatch(txtAddOrEditProductUnitPrice.Text, IConstant.REGEX_DECIMAL))
+            {
+                msg += "Product unit price is invalid\n";
+            }
+            if (string.IsNullOrEmpty(txtAddOrEditProductUnitsInStock.Text) || !System.Text.RegularExpressions.Regex.IsMatch(txtAddOrEditProductUnitsInStock.Text, IConstant.REGEX_NUMBER))
+            {
+                msg += "Product units in stock is invalid\n";
+            }
+            if (msg != "")
+            {
+                MessageBox.Show(msg);
+                return false;
+            }
+            else return true;
+
         }
     }
 }

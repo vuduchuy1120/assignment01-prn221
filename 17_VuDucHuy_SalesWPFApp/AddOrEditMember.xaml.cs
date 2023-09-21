@@ -4,7 +4,9 @@ using DataAccess.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -95,19 +97,41 @@ namespace _17_VuDucHuy_SalesWPFApp
             {
                 if (Login.isRegister)
                 {
-                    Member mb = GetMemberObject();
-                    memberRepository.InsertMember(mb);
-                    Login.isRegister = false;
-                    this.Close();
+                    try
+                    {
+                        if(Validation())
+                        {
+                            Member mb = GetMemberObject();
+                            memberRepository.InsertMember(mb);
+                            Login.isRegister = false;
+                            this.Close();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Email really exist!");
+                    }
+                   
                 }
                 else
                 {
                     if (MemberManagement.isAddMember)
                     {
                         Member mb = GetMemberObject();
-                        memberRepository.InsertMember(mb);
-                        MemberManagement.isAddMember = false;
-                        this.Close();
+                        try
+                        {
+                            if(!Validation())
+                            {
+                                return;
+                            }
+                            memberRepository.InsertMember(mb);
+                            MemberManagement.isAddMember = false;
+                            this.Close();
+                        }catch(Exception ex)
+                        {
+                            MessageBox.Show("Email really exist!");
+                        }
+                        
                     }
                     else if (Login.isAdmin == true)
                     {
@@ -117,8 +141,19 @@ namespace _17_VuDucHuy_SalesWPFApp
                         mb.City = txtAddOrEditMemberCity.Text;
                         mb.Country = txtAddOrEditMemberCountry.Text;
                         mb.Password = txtAddOrEditMemberPassword.Password;
-                        memberRepository.UpdateMember(mb);
-                        this.Close();
+                        try
+                        {
+                            if(!Validation())
+                            {
+                                return;
+                            }
+                            memberRepository.UpdateMember(mb);
+                            this.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Email really exist!");
+                        }
                     }
                     else if (Login.isAdmin == false)
                     {
@@ -127,8 +162,20 @@ namespace _17_VuDucHuy_SalesWPFApp
                         mb.City = txtAddOrEditMemberCity.Text;
                         mb.Country = txtAddOrEditMemberCountry.Text;
                         mb.Password = txtAddOrEditMemberPassword.Password;
-                        memberRepository.UpdateMember(mb);
-                        this.Close();
+
+                        try
+                        {
+                            if (!Validation())
+                            {
+                                return;
+                            }
+                            memberRepository.UpdateMember(mb);
+                            this.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Email really exist!");
+                        }
                     }
 
                 }
@@ -136,8 +183,43 @@ namespace _17_VuDucHuy_SalesWPFApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Email really exist!");
             }
+        }
+
+        private bool Validation()
+        {
+            string msg = "";
+
+            if (string.IsNullOrEmpty(txtAddOrEditEmail.Text) || !Regex.IsMatch(txtAddOrEditEmail.Text,IConstant.REGEX_EMAIL))
+            {
+                msg += "Email is invalid\n";
+            }
+            if(string.IsNullOrEmpty(txtAddOrEditCompanyName.Text) || !Regex.IsMatch(txtAddOrEditCompanyName.Text, IConstant.REGEX_TEXT))
+            {
+                msg += "Company name is invalid\n";
+            }
+            if(string.IsNullOrEmpty(txtAddOrEditMemberCity.Text) || !Regex.IsMatch(txtAddOrEditMemberCity.Text, IConstant.REGEX_TEXT))
+            {
+                msg += "City is invalid\n";
+            }
+            if(string.IsNullOrEmpty(txtAddOrEditMemberCountry.Text) || !Regex.IsMatch(txtAddOrEditMemberCountry.Text, IConstant.REGEX_TEXT))
+            {
+                msg += "Country is invalid\n";
+            }
+            if(string.IsNullOrEmpty(txtAddOrEditMemberPassword.Password))
+            {
+                msg += "Password is invalid\n";
+            }
+
+            if (msg != "")
+            {
+
+                MessageBox.Show(msg);
+                return false;
+            }
+            else return true;
+
         }
 
         private void btnAddOrEditCancel_Click(object sender, RoutedEventArgs e)

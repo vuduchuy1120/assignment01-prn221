@@ -57,17 +57,7 @@
                               Text="{Binding Country, Mode=OneWay}"/>
                 </StackPanel>
                 <!--Password Xin a zai day. -->
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <TextBlock Text="Password: " FontSize="14" Width="150"/>
-                    <PasswordBox
-                        DataContext="{Binding ElementName=lvMember,Path=SelectedItem}"
-                        IsEnabled="False" 
-                        x:Name="txtMemberPassword"
-                        Width="200" FontSize="14" 
-                        FontWeight="Bold" 
-                        TabIndex="1"
-                        PasswordChar ="*"/>
-                </StackPanel>
+                
                 <!--Button Load, Add, Edit, Remove-->
                 <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Right"
