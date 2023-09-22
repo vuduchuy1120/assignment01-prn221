@@ -1,9 +1,11 @@
 ﻿using _17_VuDucHuy_BussinessObject.Models;
 using DataAccess;
 using DataAccess.Repository;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,7 +61,18 @@ namespace _17_VuDucHuy_SalesWPFApp
 
         private bool TryLoginAsAdmin(string username, string password)
         {
-            return (username == "admin" && password == "admin");
+            return AdminCheck(username, password);
+        }
+        private Boolean AdminCheck(string username, string password)
+        {
+            var admin = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).
+                AddJsonFile("appsettings.json").Build().GetSection("Admin");
+
+            if (!admin["username"].Equals(username) || !admin["password"].Equals(password))
+            {
+                return false;
+            }
+            return true;
         }
 
         private bool TryLoginAsMember(string username, string password)

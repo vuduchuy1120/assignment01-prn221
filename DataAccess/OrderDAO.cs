@@ -125,7 +125,7 @@ namespace DataAccess
             try
             {
                 var myContext = new ShoppingContext();
-                var orders = myContext.Orders.Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate).ToList();
+                var orders = myContext.Orders.Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate).OrderByDescending<Order, DateTime>(order => order.OrderDate).ToList();
                 return orders;
             }
             catch (Exception ex)

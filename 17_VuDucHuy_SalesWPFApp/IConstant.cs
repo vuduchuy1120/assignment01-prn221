@@ -13,7 +13,7 @@ namespace _17_VuDucHuy_SalesWPFApp
         public static string REGEX_DECIMAL = "^\\d+(\\.\\d+)?$";
 
         public static string REGEX_EMAIL = "^[\\w-\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
-        public static string REGEX_TEXT = "^[a-zA-Z]*$";
+        public static string REGEX_TEXT = "^[a-z A-Z]*$";
         public static string REGEX_DATE =
                 "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|"
                         + "(?:(?:29|30)(\\/|-|\\.)"
